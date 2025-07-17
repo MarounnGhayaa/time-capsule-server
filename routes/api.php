@@ -10,10 +10,24 @@ use App\Http\Controllers\Users\PublicWallController;
 use App\Http\Controllers\Users\RegisterController;
 use App\Http\Controllers\Users\ViewCapsuleController;
 
-Route::get('/createCapsule', [CreateCapsuleController::class, 'printCap']);
-Route::get('/dashboard', [DashboardController::class, 'printDash']);
-Route::get('/login', [LoginController::class, 'printLog']);
-Route::get('/profile', [ProfileController::class, 'printPro']);
-Route::get('/publicWall', [PublicWallController::class, 'printPub']);
-Route::get('/register', [RegisterController::class, 'printReg']);
-Route::get('/viewCapsule', [ViewCapsuleController::class, 'printView']);
+Route::get('/printCapsule', [CreateCapsuleController::class, 'printCap']);
+
+Route::get('/printDashboard', [DashboardController::class, 'printDash']);
+Route::get('/getUserCapsule/{id}', [DashboardController::class, 'getUserCapsules']);
+Route::get('/getTotalCapsulesNb/{id}', [DashboardController::class, 'getTotalCapsulesNb']);
+Route::get('/getPastCapsulesNb/{id}', [DashboardController::class, 'getPastCapsulesNb']);
+Route::get('/getUpcomingCapsulesNb/{id}', [DashboardController::class, 'getUpcomingCapsulesNb']);
+
+Route::get('/printLogin', [LoginController::class, 'printLog']);
+
+Route::get('/printProfile', [ProfileController::class, 'printPro']);
+Route::get('/getInfo/{id}', [ProfileController::class, 'getUserInfo']);
+
+Route::get('/printPublicWall', [PublicWallController::class, 'printPub']);
+Route::get('/publicCapsules', [PublicWallController::class, 'getPublicCapsules']);
+Route::get('/getCapsule/{id}', [PublicWallController::class, 'getSpecificCapsule']);
+
+Route::get('/printRegister', [RegisterController::class, 'printReg']);
+
+Route::get('/printCapsule', [ViewCapsuleController::class, 'printView']);
+Route::get('/viewCapsule/{id}', [ViewCapsuleController::class, 'viewCapsule']);
