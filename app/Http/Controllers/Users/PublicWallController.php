@@ -17,20 +17,12 @@ class PublicWallController extends Controller
     public function getPublicCapsules(){
         $capsules = Capsule::where('privacy', 'public')->get();
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsules;
-
-        return json_encode($response, 200);
+        return $this->responseJSON($capsules);
     }
 
     public function getSpecificCapsule($id){
         $capsule = Capsule::find($id);
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsule;
-
-        return json_encode($response, 200);
+        return $this->responseJSON($capsule);
     }
 }

@@ -14,20 +14,12 @@ class DashboardController extends Controller
 
     public function getUserCapsules($id) {
         $capsules = Capsule::where('user_id', $id)->get();
-
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsules;
-        return json_encode($response, 200);
+        return $this->responseJSON($capsules);
     }
 
     public function getTotalCapsulesNb($id){
         $capsulesCount = Capsule::where('user_id', $id)->count();
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsulesCount;
-
-        return json_encode($response, 200);
+        return $this->responseJSON($capsulesCount);
     }
 
     public function getPastCapsulesNb($id) {
@@ -35,11 +27,7 @@ class DashboardController extends Controller
                         ->where('reveal_at', '<', now())
                         ->count();
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $pastCapsules;
-
-        return json_encode($response, 200);
+        return $this->responseJSON($pastCapsules);
     }
 
         public function getUpcomingCapsulesNb($id) {
@@ -47,11 +35,7 @@ class DashboardController extends Controller
                         ->where('reveal_at', '>', now())
                         ->count();
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $upcomingCapsules;
-
-        return json_encode($response, 200);
+        return $this->responseJSON($upcomingCapsules);
     }
 
 }

@@ -15,10 +15,6 @@ class ViewCapsuleController extends Controller
     public function viewCapsule($id) {
         $capsule = Capsule::find($id);
 
-        $response = [];
-        $response["status"] = "success";
-        $response["payload"] = $capsule;
-
-        return json_encode($response, 200);   
+        return $this->responseJSON($capsule);
     }
 }
