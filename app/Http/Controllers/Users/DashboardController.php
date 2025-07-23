@@ -3,39 +3,22 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\User\CapsuleService;
 
-use App\Models\Capsule;
-class DashboardController extends Controller
-{
-    public function printDash() {
-        return ("Hello Dashboard!");
-    }
+class DashboardController extends Controller {
 
     public function getUserCapsules($id) {
-        $capsules = Capsule::where('user_id', $id)->get();
+        $capsules = CapsuleService::getUserCapsules($id);
         return $this->responseJSON($capsules);
     }
 
-    public function getTotalCapsulesNb($id){
-        $capsulesCount = Capsule::where('user_id', $id)->count();
-        return $this->responseJSON($capsulesCount);
+    public function getPastCapsules($id){
+        $capsules = CapsuleService::getPastCapsules($id);
+        return $this->responseJSON($capsules);
     }
 
-    public function getPastCapsulesNb($id) {
-        $pastCapsules = Capsule::where('user_id', $id)
-                        ->where('reveal_at', '<', now())
-                        ->count();
-
-        return $this->responseJSON($pastCapsules);
+    public function getUpcomingCapsules($id) {
+        $capsules = CapsuleService::getUpcomingCapsules($id);
+        return $this->responseJSON($capsules);
     }
-
-        public function getUpcomingCapsulesNb($id) {
-        $upcomingCapsules = Capsule::where('user_id', $id)
-                        ->where('reveal_at', '>', now())
-                        ->count();
-
-        return $this->responseJSON($upcomingCapsules);
-    }
-
 }
